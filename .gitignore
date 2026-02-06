@@ -1,0 +1,14 @@
+# PyCharm
+.idea/
+
+# Virtual Environment / uv
+venv/
+ENV/
+env/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# .env
+.env

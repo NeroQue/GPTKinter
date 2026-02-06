@@ -1,0 +1,9 @@
+[project]
+name = "gptkinter"
+version = "0.1.0"
+description = "ChatGPT Bot with tkinter GUI"
+requires-python = ">=3.14"
+dependencies = [
+    "customtkinter>=5.2.2",
+    "openai==2.17.0",
+]

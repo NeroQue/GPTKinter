@@ -1,8 +1,11 @@
+import os
 from tkinter import *
 import customtkinter
 import openai
-import os
-import pickle
+from dotenv import load_dotenv
+
+load_dotenv()
+api_key = os.getenv("API_KEY")
 
 # Initiate the app
 root = customtkinter.CTk()
@@ -12,11 +15,30 @@ root.iconbitmap("logo.ico")
 
 # Submit Button Function
 def speak():
-    pass
+    # Check Text from Entry Box
+    if entry_widget.get():
+        if api_key:
+            client = openai.OpenAI(api_key=api_key)
+            response = client.responses.create(
+                                                model="gpt-4o",
+                                                input=entry_widget.get(),
+                                                instructions="You are a helpful assistant. Answer the user's question as detailed as possible.",
+                                                )
+            text_widget.insert(END, "\n\n" + response.output_text)
+        else:
+            print("Please add your OpenAI API key in the .env file.")
+            return
+    else:
+        text_widget.insert(END, "\n\nPlease type something in the entry box.")
 
 # Clear Text
 def clear():
-    pass
+    # Clear Main Text Box
+    text_widget.delete("1.0", END)
+    # Clear Entry Box
+    entry_widget.delete(0, END)
+    # Lose focus
+    root.focus_set()
 
 # Set Colored Theme
 customtkinter.set_appearance_mode("system")
